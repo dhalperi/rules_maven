@@ -1,5 +1,6 @@
 load("//maven:internal/require.bzl", "require")
 load("//maven:internal/require_toolchain.bzl", "require_toolchain")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 GRADLE_VERSION = "4.10.2"
 
@@ -17,7 +18,7 @@ exports_files(["lib/gradle-launcher-{version}.jar"])
 
 DEPS = {
     "gradle_distribution": {
-        "rule": "new_http_archive",
+        "rule": http_archive,
         "url": "https://services.gradle.org/distributions/gradle-%s-bin.zip" % GRADLE_VERSION,
         "sha256": "",
         "strip_prefix": "gradle-" + GRADLE_VERSION,

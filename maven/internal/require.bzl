@@ -40,8 +40,9 @@ def _install(deps, verbose):
         rule = d.pop("rule", None)
         if not rule:
             fail("Missing attribute 'rule': %s" % name)
-        if hasattr(native, rule):
+        if type(rule) == "string" and hasattr(native, rule):
             rule = getattr(native, rule)
+        if type(rule) == "function":
             if verbose: print("Loading %s)" % name)
             rule(**d)
         else:
